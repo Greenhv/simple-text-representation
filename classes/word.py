@@ -1,7 +1,14 @@
 class Word:
-  def __init__(self):
+  def __init__(self, strWord):
     self.characters = ''
     self.type = ''
+
+    if (strWord):
+      word = self.removeSpecialCharacters(strWord)
+      self.characters = word
+
+  def removeSpecialCharacters(self, strWord):
+    return ''.join(character for character in strWord if character.isalnum())
 
   def length(self):
     return len(self.characters)
