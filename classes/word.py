@@ -10,6 +10,9 @@ class Word:
   def removeSpecialCharacters(self, strWord):
     return ''.join(character for character in strWord if character.isalnum())
 
+  def getChars(self):
+    return self.characters
+
   def length(self):
     return len(self.characters)
 
