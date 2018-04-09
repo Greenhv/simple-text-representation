@@ -5,7 +5,8 @@ class Text:
   def __init__(self):
     self.paragraphs = list()
     self.unformatedParagraphs = list()
-    self._title = ''
+    self.title = ''
+    self.grade = -1
 
   def toString(self):
     text = ''
@@ -15,11 +16,17 @@ class Text:
 
     return text
 
+  def setGrade(self, grade):
+    self.grade = grade
+  
+  def getGrade(self):
+    return self.grade
+
   def setTitle(self, newTitle):
-    self._title = newTitle
+    self.title = newTitle
 
   def getTitle(self):
-      return self._title
+      return self.title
 
   def addParagraph(self, paragrah):
     return self.paragraphs.append(paragrah)
@@ -38,7 +45,8 @@ class Text:
 
       with database.getDatabase().transaction():
         text = TextModel.create(
-          title=self._title
+          title=self.title
+          grade=self.grade
         )
         for paragraph in self.paragraphs:
           paragraph.save(database, text.id)
