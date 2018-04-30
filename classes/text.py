@@ -45,13 +45,33 @@ class Text:
 
       with database.getDatabase().transaction():
         text = TextModel.create(
-          title=self.title
+          title=self.title,
           grade=self.grade
         )
         for paragraph in self.paragraphs:
           paragraph.save(database, text.id)
       database.closeConnetion()
-    except IntegrityError:
+    except:
       print('Somethinig went wrong!')
 
+  @staticmethod
+  def getText(database, id=1):
+    try:
+      database.establishConnection()
+      textArr = list()
 
+      with database.getDatabase():
+        text = TextModel.get(TextModel.id == id)
+        paragraphs = text.paragraphs
+        for paragraph in paragraphs:
+          paragraphArr = list()
+          sentences = paragraph.sentences
+          for sentence in sentences:
+            paragraphArr.append(sentence.value)
+          textArr.append(paragraphArr)
+      database.closeConnetion()
+
+      return textArr
+    except:
+      database.closeConnetion()
+      print('Something went wrong')
