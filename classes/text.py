@@ -68,10 +68,12 @@ class Text:
           sentences = paragraph.sentences
           for sentence in sentences:
             paragraphArr.append(sentence.value)
+          paragraphArr.reverse()
           textArr.append(paragraphArr)
       database.closeConnetion()
 
       return textArr
-    except:
+    except ValueError:
       database.closeConnetion()
+      print(ValueError)
       print('Something went wrong')
