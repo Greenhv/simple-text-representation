@@ -9,7 +9,7 @@ class TextModel(BaseModel):
   '''
   title = CharField()
   date_created = DateTimeField(default=datetime.datetime.now)
-  # grade = IntegerField()
+  grade = IntegerField()
 
   class Meta:
     db_table = 'text'

@@ -4,8 +4,7 @@ class Word:
     self.type = ''
 
     if (strWord):
-      word = self.removeSpecialCharacters(strWord)
-      self.characters = word
+      self.characters = strWord
 
   def removeSpecialCharacters(self, strWord):
     return ''.join(character for character in strWord if character.isalnum())
