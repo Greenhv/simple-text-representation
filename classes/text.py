@@ -77,7 +77,31 @@ class Text:
       database.closeConnetion()
       print(ValueError)
       print('Something went wrong')
-  
+
+  @staticmethod
+  def getTexts(database, grade=7):
+    try:
+      database.establishConnection()
+      texts = list()
+
+      with database.getDatabase():
+        for text in TextModel.select().where(TextModel.grade == f'{grade}'):
+          textArr = list()
+          for paragraph in text.paragraphs:
+            paragraphArr = list()
+            for sentence in paragraph.sentences:
+              paragraphArr.append(sentence.value)
+            paragraphArr.reverse()
+            textArr.append(paragraphArr)
+          texts.append(textArr)
+      database.closeConnetion()
+
+      return texts
+    except ValueError:
+      database.closeConnetion()
+      print(ValueError)
+      print('Something went wrong')
+
   @staticmethod
   def getAllTexts(database):
     try:
